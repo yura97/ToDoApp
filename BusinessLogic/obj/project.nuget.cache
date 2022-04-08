@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "iwkI0Nnw6xRhPzqi9ooMWtjCbu4vn0P15sHLcpPdXRujXZV3MFBc0Y6AjYfVVHh6kTWoimX1G4t1hFjOKhuNFA==",
+  "success": true,
+  "projectFilePath": "E:\\Data\\Docs\\Polytech Magistracy\\2\\web\\ToDoApp\\BusinessLogic\\BusinessLogic.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\yurai\\.nuget\\packages\\microsoft.extensions.dependencyinjection.abstractions\\6.0.0\\microsoft.extensions.dependencyinjection.abstractions.6.0.0.nupkg.sha512"
+  ],
+  "logs": []
+}
