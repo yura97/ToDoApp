@@ -32,13 +32,20 @@ namespace RestApi.Controllers
         }
         
         [HttpGet]
-        public ActionResult<IReadOnlyCollection<Task>> GetTask()
+        public ActionResult<IReadOnlyCollection<Task>> GetTasks()
         {
             return _taskService.GetAll().ToArray();
         }
+        
+        [HttpGet("tasks/task-group/{id}")]
+        public ActionResult<IReadOnlyCollection<Task>> GetTasksForGroup(int id)
+        {
+            // return _taskService.GetAll().ToArray();
+            return _taskService.GetTasksForGroup(id).ToArray();
+        }
 
         [HttpPost]
-        public IActionResult AddStudent(Task task)
+        public IActionResult AddTask(Task task)
         {
             try
             {
@@ -53,7 +60,7 @@ namespace RestApi.Controllers
         }
         
         [HttpPut("{id}")]
-        public ActionResult<string> UpdateStudent(int id, Task task)
+        public ActionResult<string> UpdateTask(int id, Task task)
         {
             try
             {
@@ -68,7 +75,7 @@ namespace RestApi.Controllers
         }
         
         [HttpDelete("{id}")]
-        public ActionResult DeleteStudent(int id)
+        public ActionResult DeleteTask(int id)
         {
             try
             {

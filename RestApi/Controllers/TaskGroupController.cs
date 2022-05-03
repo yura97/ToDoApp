@@ -22,7 +22,7 @@ namespace RestApi.Controllers
         }
         
         [HttpGet("{id}")]
-        public ActionResult<TaskGroup> GetTask(int id)
+        public ActionResult<TaskGroup> GetTaskGroup(int id)
         {
             return _taskService.Get(id) switch
             {
@@ -32,43 +32,45 @@ namespace RestApi.Controllers
         }
         
         [HttpGet]
-        public ActionResult<IReadOnlyCollection<TaskGroup>> GetTask()
+        public ActionResult<IReadOnlyCollection<TaskGroup>> GetTaskGroups()
         {
             return _taskService.GetAll().ToArray();
         }
 
         [HttpPost]
-        public IActionResult AddStudent(TaskGroup task)
+        public IActionResult AddTaskGroup(TaskGroup task)
         {
             try
             {
                 var newTaskId = _taskService.New(task);
-                return Ok($"api/task-group/{newTaskId}");
+                // return Ok($"api/task-group/{newTaskId}");
+                return Ok(newTaskId);
             }
             catch (Exception e)
             {
-                _logger.LogError("Add Student: There is already exist Student with that id");
-                throw new Exception("There is already exist Student with that id");
+                _logger.LogError("Add TaskGroup: There is already exist TaskGroup with that id");
+                throw new Exception("There is already exist TaskGroup with that id");
             }
         }
         
         [HttpPut("{id}")]
-        public ActionResult<string> UpdateStudent(int id, TaskGroup task)
+        public ActionResult<string> UpdateTaskGroup(int id, TaskGroup task)
         {
             try
             {
                 var taskId = _taskService.Edit(task with { Id = id });
                 return Ok($"api/task-group/{taskId}");
+                // return Ok(taskId);
             }
             catch (Exception e)
             {
-                _logger.LogError("Edit Student: There is no Student with that id");
+                _logger.LogError("Edit TaskGroup: There is no TaskGroup with that id");
                 throw;
             }
         }
         
         [HttpDelete("{id}")]
-        public ActionResult DeleteStudent(int id)
+        public ActionResult DeleteTaskGroup(int id)
         {
             try
             {
@@ -77,8 +79,8 @@ namespace RestApi.Controllers
             }
             catch (ArgumentNullException e)
             {
-                _logger.LogError("Delete Student: There is no Student with that id");
-                throw new ArgumentNullException("There is no Student with that id");
+                _logger.LogError("Delete TaskGroup: There is no TaskGroup with that id");
+                throw new ArgumentNullException("There is no TaskGroup with that id");
             }
         }
     }

@@ -25,6 +25,16 @@ namespace DataAccess.Repositories
             var tasksDb = context.Tasks.ToList();
             return mapper.Map<IReadOnlyCollection<Task>>(tasksDb);
         }
+        
+        public IEnumerable<Task> GetTasksForGroup(int id)
+        {
+            var idsTasks = context.ToDos.ToList().Where(ids => ids.TaskGroupId == id).ToList();
+            var tasksDb = context.Tasks.ToList();
+
+            var result = tasksDb.Where(a => idsTasks.Any(b => b.TaskId == a.Id)).ToList();
+
+            return mapper.Map<IReadOnlyCollection<Task>>(result);
+        }
 
         public Task? Get(int id)
         {

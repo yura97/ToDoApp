@@ -1,16 +1,18 @@
-﻿/*!* Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification*/
-/*for details on configuring this project to bundle and minify static web assets. *!*/
+﻿/* Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
+for details on configuring this project to bundle and minify static web assets. */
 
-/*a.navbar-brand {*/
-/*  white-space: normal;*/
-/*  text-align: center;*/
-/*  word-break: break-all;*/
-/*}*/
+input[disabled] {pointer-events:none}
 
-/*!* Provide sufficient contrast against white background *!*/
-/*a {*/
-/*  color: #0366d6;*/
-/*}*/
+a.navbar-brand {
+  white-space: normal;
+  text-align: center;
+  word-break: break-all;
+}
+
+/* Provide sufficient contrast against white background */
+a {
+  color: #0366d6;
+}
 
 /*.btn-primary {*/
 /*  color: #fff;*/
@@ -24,93 +26,66 @@
 /*  border-color: #1861ac;*/
 /*}*/
 
-/*!* Sticky footer styles*/
-/*-------------------------------------------------- *!*/
-/*html {*/
-/*  font-size: 14px;*/
-/*}*/
-/*@media (min-width: 768px) {*/
-/*  html {*/
-/*    font-size: 16px;*/
-/*  }*/
-/*}*/
-
-/*.border-top {*/
-/*  border-top: 1px solid #e5e5e5;*/
-/*}*/
-/*.border-bottom {*/
-/*  border-bottom: 1px solid #e5e5e5;*/
-/*}*/
-
-/*.box-shadow {*/
-/*  box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05);*/
-/*}*/
-
-/*button.accept-policy {*/
-/*  font-size: 1rem;*/
-/*  line-height: inherit;*/
-/*}*/
-
-/*!* Sticky footer styles*/
-/*-------------------------------------------------- *!*/
-/*html {*/
-/*  position: relative;*/
-/*  min-height: 100%;*/
-/*}*/
-
-/*body {*/
-/*  !* Margin bottom by footer height *!*/
-/*  margin-bottom: 60px;*/
-/*}*/
-/*.footer {*/
-/*  position: absolute;*/
-/*  bottom: 0;*/
-/*  width: 100%;*/
-/*  white-space: nowrap;*/
-/*  line-height: 60px; !* Vertically center the text there *!*/
-/*}*/
+/* Sticky footer styles
+-------------------------------------------------- */
+html {
+  font-size: 14px;
+  font-family: Arial, Helvetica, sans-serif;
+}
 
 
+#todo-app{
+  border-radius: 5px;
+  width: 40%;
+  height: 50vh;
+  margin: auto;
+  padding: 0;
+  background: #37bb81;
+}
+#todo-app__header{
+  background: transparent;
+  /*height: 20%;*/
+  text-align: center;
+  padding: 10px 0px;
+}
+#todo-app__body{
+  height: 80%;
+  background: #FFF;
+  border-radius: 25px 25px 0 0;
+  padding: 6% 4%;
+}
+.todo-app__add{
+  display: inline-block;
+  margin: 3px 0px;
+  /*height: 50%;*/
+  width: 80%;
+}
+.add__input{
+  background: white;
+  padding: 5px 10px;
+  outline: none;
+  border: none;
+  border-radius: 10px 0 0 10px;
+}
+.add__button{
+  background: white;
+  padding: 5px 10px;
+  outline: none;
+  border: none;
+  border-radius: 0px 10px 10px 0px;
+  cursor: pointer;
+}
+.todo-app__filter{
+  background: white;
+  border-radius: 10px 10px 10px 10px;
+  border: none;
+  padding: 1px 20px;
+  margin: 3px;
+}
 
-/*.todo-app{*/
-/*  border-radius: 5px;*/
-/*  width: 40%;*/
-/*  height: 50vh;*/
-/*  margin: auto;*/
-/*  padding: 0;*/
-/*  background: #78a9ce;*/
-/*}*/
-/*.todo-app__header{*/
-/*  background: transparent;*/
-/*  height: 20%;*/
-/*  text-align: center;*/
-/*}*/
-/*.todo-app__body{*/
-/*  height: 80%;*/
-/*  background: #FFF;*/
-/*  border-radius: 25px 25px 0 0;*/
-/*}*/
-/*.todo-app__add{*/
-/*}*/
-/*.add{*/
-/*  display: inline-block;*/
-/*  background: #fff;*/
-/*}*/
-/*.add__input{*/
-/*  background: white;*/
-/*  padding: 5px 10px;*/
-/*  outline: none;*/
-/*  border: none;*/
-/*  border-radius: 10px 0 0 10px;*/
-/*}*/
-/*.add__button{*/
-/*  background: white;*/
-/*  padding: 5px 10px;*/
-/*  outline: none;*/
-/*  border: none;*/
-/*  border-radius: 10px 0 0 10px;*/
-/*  cursor: pointer;*/
-/*}*/
+.tasks{
+  margin-left: 10%;
+}
 
 input[type='submit'], button, [aria-label] {
   cursor: pointer;
@@ -118,20 +93,94 @@ input[type='submit'], button, [aria-label] {
 
 #editForm {
   display: none;
+  
 }
 
-table {
-  font-family: Arial, sans-serif;
-  border: 1px solid;
-  border-collapse: collapse;
+#groups{
+  padding-left: 25px;
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: flex-start;
+  align-items: flex-end;
+}
+.todo__group{
+  border-radius: 10px 10px 0px 0px;
+  padding: 0 8px;
+  background: #FFF;
+  flex-wrap: nowrap;
+  display: inline-flex;
+  white-space: nowrap;
+}
+.todo__input{
+  border: none;
 }
 
-th {
-  background-color: #f8f8f8;
-  padding: 5px;
+/*#add-name{*/
+/*  background: white;*/
+/*  padding: 5px 10px;*/
+/*  outline: none;*/
+/*  border: none;*/
+/*  border-radius: 10px 0 0 10px;*/
+/*}*/
+
+
+/*table {*/
+/*  !*font-family: Arial, sans-serif;*!*/
+/*  !*border: 1px solid;*!*/
+/*  border-collapse: collapse;*/
+/*}*/
+/*.tt{*/
+/*  border-collapse: collapse;*/
+/*}*/
+
+/*th {*/
+/*  background-color: #f8f8f8;*/
+/*  padding: 5px;*/
+/*}*/
+
+/*td {*/
+/*  border: 1px solid;*/
+/*  padding: 5px;*/
+/*}*/
+
+table, th, td {
+  border-collapse: separate;
 }
 
-td {
-  border: 1px solid;
-  padding: 5px;
+#tasks{
+  border-radius: 10px;
+  width: 100%;
+  position: relative;
+  background-color: #ffffff;
+  padding: 30px 20px;
+  margin-top: 10px;
+}
+
+.task{
+  border-radius: 5px;
+  align-items: center;
+  justify-content: space-between;
+  border: 1px solid #939697;
+  cursor: pointer;
+  background-color: #c5e1e6;
+  height: 50px;
+  margin-bottom: 8px;
+  padding: 5px 10px;
+  display: flex;
+}
+.task span{
+  font-family: 'Poppins',sans-serif;
+  font-size: 15px;
+  font-weight: 400;
+}
+
+.task button{
+  background-color: #0a2ea4;
+  color: #ffffff;
+  border: none;
+  cursor: pointer;
+  outline: none;
+  height: 100%;
+  width: 40px;
+  border-radius: 5px;
 }
