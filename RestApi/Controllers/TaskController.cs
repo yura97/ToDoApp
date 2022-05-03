@@ -50,7 +50,7 @@ namespace RestApi.Controllers
             try
             {
                 var newTaskId = _taskService.New(task);
-                return Ok($"api/task/{newTaskId}");
+                return Ok(newTaskId);
             }
             catch (Exception e)
             {
@@ -65,7 +65,8 @@ namespace RestApi.Controllers
             try
             {
                 var taskId = _taskService.Edit(task with { Id = id });
-                return Ok($"api/task/{taskId}");
+                // return Ok($"api/task/{taskId}");
+                return Ok(taskId);
             }
             catch (Exception e)
             {

@@ -12,38 +12,22 @@
     <div id="todo-app__header">
         <div>TO DO</div>
         <div class="todo-app__add">
-            <form action="javascript:void(0);" method="POST" onsubmit="addItem()">
-                <input type="text" class="add__input" id="add-name" placeholder="New task">
-                <input type="submit" class="add__button" value="Add Task">
-            </form>
+<!--            <form action="javascript:void(0);" method="POST" onsubmit="addTask()">-->
+<!--                <input type="text" class="add__input" id="add-name" placeholder="New task">-->
+<!--                <input type="submit" class="add__button" value="Add Task">-->
+<!--            </form>-->
+            <input type="text" class="add__input" id="add-name" placeholder="New task">
+            <input type="submit" class="add__button" value="Add Task" onclick="addTask()">
         </div>
         <br style="clear: both;">
         <div class="todo-app__add">
-            <form action="javascript:void(0);" method="POST" onsubmit="addGroup()">
-                <input type="text" class="add__input" id="add-group" placeholder="New group">
-                <input type="submit" class="add__button" value="Add Group">
-            </form>
+<!--            <form action="javascript:void(0);" method="POST" onsubmit="addGroup()">-->
+<!--                <input type="text" class="add__input" id="add-group" placeholder="New group">-->
+<!--                <input type="submit" class="add__button" value="Add Group">-->
+<!--            </form>-->
+            <input type="text" class="add__input" id="add-group" placeholder="New group">
+            <input type="submit" class="add__button" value="Add Group">
         </div>
-<!--        <div id="editForm-task">-->
-<!--            <form action="javascript:void(0);" onsubmit="updateItem()">-->
-<!--                <h3>Edit</h3>-->
-<!--                <input type="hidden" id="edit-id-task">-->
-<!--&lt;!&ndash;                <input type="checkbox" id="edit-isComplete">&ndash;&gt;-->
-<!--                <input type="text" id="edit-name-task">-->
-<!--                <input type="submit" value="Save">-->
-<!--                <a onclick="closeInput()" aria-label="Close">&#10006;</a>-->
-<!--            </form>-->
-<!--        </div>-->
-<!--        <div id="editForm-taskGroup">-->
-<!--            <form action="javascript:void(0);" onsubmit="updateGroup()">-->
-<!--                <h3>Edit</h3>-->
-<!--                <input type="hidden" id="edit-id">-->
-<!--                &lt;!&ndash;                <input type="checkbox" id="edit-isComplete">&ndash;&gt;-->
-<!--                <input type="text" id="edit-name">-->
-<!--                <input type="submit" value="Save">-->
-<!--                <a onclick="closeInput()" aria-label="Close">&#10006;</a>-->
-<!--            </form>-->
-<!--        </div>-->
     </div>
     <div id="groups">
         
@@ -51,17 +35,15 @@
     <div id="todo-app__body">
         <div class="todo-app__filter">
             <p id="counter"></p>
+            <p 
         </div>
         <div id="tasks">
             
         </div>
         
-        
         <script src="js/taskGroup.js" asp-append-version="true"></script>
         <script type="text/javascript">
             getGroups();
-            // get tasks for first group
-            // getItems(firstGroup);
         </script>
     </div>
 </div>

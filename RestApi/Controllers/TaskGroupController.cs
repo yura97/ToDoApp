@@ -59,8 +59,8 @@ namespace RestApi.Controllers
             try
             {
                 var taskId = _taskService.Edit(task with { Id = id });
-                return Ok($"api/task-group/{taskId}");
-                // return Ok(taskId);
+                // return Ok($"api/task-group/{taskId}");
+                return Ok(taskId);
             }
             catch (Exception e)
             {

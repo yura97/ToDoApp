@@ -1,5 +1,4 @@
 ﻿const uri_group = 'api/task-group';
-let taskGroups = [];
 
 let chosenGroupId = 0;
 
@@ -32,11 +31,17 @@ let chosenGroupId = 0;
 function _getGroupHtmlBlock(item) {
     return `
             <div class="todo__group" id="group_${item.id}" style="border-bottom: 1px solid black;" onclick="choseGroup(${item.id})">
-                <input type="text" class="todo__input" id="groupname-input_${item.id}" value="${item.taskGroupName}" 
-                    onchange="updateGroup(${item.id})"
-                    style="pointer-events: none;"
-                    disabled>
+                ${_getGroupHtmlInput(item)}
             </div>
+        `;
+}
+
+function _getGroupHtmlInput(item) {
+    return `
+            <input type="text" class="todo__input" id="groupname-input_${item.id}" value="${item.taskGroupName}" 
+                onchange="updateGroup(${item.id})"
+                style="pointer-events: none;"
+                disabled>
         `;
 }
 
@@ -49,26 +54,18 @@ function _getHtmlForChosenGroup(id){
 }
 
 function choseGroup(id){
-    /// document.querySelector('#groups').innerHTML += _getGroupHtmlBlock(item);
-    // document.getElementById('groups').innerHTML += _getGroupHtmlBlock(item);
-    // document.getElementById('editForm').style.display = 'none';
-    // document.getElementById('edit-name')
-    
-    if( id === chosenGroupId )
+    if( id !== chosenGroupId )
     {
-        // activateInputToChangeGroupName(chosenGroupId)
-    }
-    else
-    {
-        changeHtmlLastChosenGroup();
+        changeHtmlLastChosenGroup(chosenGroupId);
         setChosenGroup(id);
+        clearTasks();
     }
 }
 
-function changeHtmlLastChosenGroup(){
-    document.getElementById('group_'+chosenGroupId).style.borderBottom = "1px solid black";
-    document.getElementById('close-group_'+chosenGroupId).remove();
-    document.getElementById('groupname-input_' + chosenGroupId).setAttribute("disabled", "");
+function changeHtmlLastChosenGroup(id){
+    document.getElementById('group_'+id).style.borderBottom = "1px solid black";
+    document.getElementById('close-group_'+id).remove();
+    document.getElementById('groupname-input_' + id).setAttribute("disabled", "");
     deactivateInputToChangeGroupName(id);
 }
 function changeHtmlChosenGroup(id){
@@ -90,6 +87,9 @@ function setChosenGroup(id){
     changeHtmlChosenGroup(id);
     getTasksForGroup(id);
 }
+function clearTasks(){
+    document.querySelector('#tasks').innerHTML = '';
+}
 
 
 function getGroups() {
@@ -106,10 +106,6 @@ function addGroup() {
         id: 0,
         taskGroupName: addNameTextbox.value.trim()
     };
-    
-    // item = {
-    //     taskGroupName: addNameTextbox.value.trim()
-    // }
 
     fetch(uri_group, {
         method: 'POST',
@@ -122,20 +118,15 @@ function addGroup() {
         .then(response => response.json())
         .then(data => item.id = data)
         .then(() => {
-            // getGroups();
-            // addNameTextbox.value = '';
             document.querySelector('#groups').innerHTML += _getGroupHtmlBlock(item);
         })
         .catch(error => console.error('Unable to add item.', error));
-
-    
 }
 
 function deleteGroup(id) {
     fetch(`${uri_group}/${id}`, {
         method: 'DELETE'
     })
-        // .then(() => getGroups())
         .catch(error => console.error('Unable to delete item.', error));
     
     document.getElementById("group_"+id).outerHTML = "";
@@ -149,11 +140,6 @@ function updateGroup(id) {
         taskGroupName: updatedName
     };
 
-    // item = {
-    //     id: parseInt(itemId, 10),
-    //     taskGroupName: document.getElementById('edit-name').value.trim()
-    // };
-
     fetch(`${uri_group}/${id}`, {
         method: 'PUT',
         headers: {
@@ -162,39 +148,13 @@ function updateGroup(id) {
         },
         body: JSON.stringify(item)
     })
-        // .then(() => getGroups())
         .catch(error => console.error('Unable to update item.', error));
 
-    // document.getElementById('groupname-input_'+id).setAttribute("disabled", "");
-    deactivateInputToChangeGroupName(id);
-
-    // closeInput();
-
-    // return false;
+    document.getElementById('groupname-input_'+id).remove();
+    document.getElementById('close-group_'+id).remove();
+    document.querySelector('#group_'+id).innerHTML += _getGroupHtmlInput(item);
+    changeHtmlChosenGroup(id);
 }
-
-// function displayGroupEditForm(id) {
-//     const item = taskGroups.find(item => item.id === id);
-//
-//     document.getElementById('edit-name').value = item.name;
-//     document.getElementById('edit-id').value = item.id;
-//     document.getElementById('editForm').style.display = 'block';
-//
-//     // document.querySelector('#group_' + id).innerHTML += `
-//     //         <form action="javascript:void(0);" onsubmit="updateItem()">
-//     //             <input type="hidden" id="edit-id">
-//     //             <input type="checkbox" id="edit-isComplete">
-//     //             <input type="text" id="edit-name">
-//     //             <input type="submit" value="Save">
-//     //             <a onclick="closeInput(${id})" aria-label="Close">&#10006;</a>
-//     //         </form>
-//     //     `;
-// }
-
-// function closeInput() {
-//     document.getElementById('editForm').style.display = 'none';
-//     // document.getElementById("group_"+id).outerHTML = "";
-// }
 
 // function _displayCount(itemCount) {
 //     const name = (itemCount === 1) ? 'task' : 'tasks';
@@ -203,69 +163,24 @@ function updateGroup(id) {
 // }
 
 function _displayGroups(data) {
-    // const tBody = document.getElementById('todos');
-    // tBody.innerHTML = '';
-
-    // _displayCount(data.length);
-
-    // const button = document.createElement('button');
     
     data.sort(function(a, b){
         return a.id-b.id
     });
+    
+    let firstElementFlag = true;
 
     data.forEach(item => {
-        // let editButton = button.cloneNode(false);
-        // editButton.innerText = 'Edit';
-        // editButton.setAttribute('onclick', `displayEditForm(${item.id})`);
-        //
-        // let deleteButton = button.cloneNode(false);
-        // deleteButton.innerText = 'Delete';
-        // deleteButton.setAttribute('onclick', `deleteItem(${item.id})`);
-
-        // let tr = tBody.insertRow();
-        //
-        // let td2 = tr.insertCell(0);
-        // let textNode = document.createTextNode(item.taskGroupName);
-        // td2.appendChild(textNode);
-        //
-        // let td3 = tr.insertCell(1);
-        // td3.appendChild(editButton);
-        //
-        // let td4 = tr.insertCell(2);
-        // td4.appendChild(deleteButton);
         
-//         groupBlock = `
-//             <div class="todo__group" id="group_${item.id}">
-//                 <span id="groupname">
-//                     ${item.taskGroupName}
-//                 </span>
-//                 <a onclick="deleteGroup(${item.id})" aria-label="Close">&#10006;</a>
-//                 <div class="tasks" id="tasks_${item.id}"></div>
-// <!--                <button class="delete">-->
-// <!--                    <i class="far fa-trash-alt"></i>-->
-// <!--                </button>-->
-//             </div>
-//         `;
-
         document.querySelector('#groups').innerHTML += _getGroupHtmlBlock(item);
         
-        if(item.id === chosenGroupId){
+        if(firstElementFlag){
             // changeHtmlChosenGroup(item.id);
             setChosenGroup(item.id);
+            firstElementFlag = false;
         }
-
         
-
-        // var current_tasks = document.querySelectorAll(".delete");
-        // for(var i=0; i<current_tasks.length; i++){
-        //     current_tasks[i].onclick = function(){
-        //         this.parentNode.remove();
-        //     }
-        // }
     });
-
-    taskGroups = data;
 }
 
 
@@ -274,17 +189,24 @@ function _displayGroups(data) {
 
 // Write your JavaScript code.
 const uri_task = 'api/task';
-let todos = [];
+const uri_todo = 'api/todo';
 
 function _getTaskHtmlBlock(item) {
     return `
             <div class="todo__task" id="task_${item.id}" >
-                <input type="checkbox" id="task-checkbox_${item.id}" checked>
-                <input type="text" class="todo__input" id="taskname-input_${item.id}" value="${item.taskName}" onclick="editTask(${item.id})" readonly>
-                <a onclick="deleteTask(${item.id})" aria-label="Close">&#10006;</a>
+                ${_getTaskInputHtmlBlock(item)}
             </div>
         `;
 }
+function _getTaskInputHtmlBlock(item) {
+    return `
+            <input type="checkbox" id="task-checkbox_${item.id}"
+                onchange="updateTask(${item.id})">
+            <input type="text" class="todo__input" id="taskname-input_${item.id}" value="${item.taskName}"
+                onchange="updateTask(${item.id})">
+            <a onclick="deleteTask(${item.id})" aria-label="Close">&#10006;</a>
+        `;
+} 
 
 
 function getTasksForGroup(groupId){
@@ -305,8 +227,14 @@ function addTask() {
     const addNameTextbox = document.getElementById('add-name');
 
     const item = {
+        id: 0,
         isDone: false,
         taskName: addNameTextbox.value.trim()
+    };
+
+    const todo = {
+        taskGroupId: chosenGroupId,
+        taskId: 0
     };
 
     fetch(uri_task, {
@@ -318,10 +246,27 @@ function addTask() {
         body: JSON.stringify(item)
     })
         .then(response => response.json())
-        .then(() => {
-            getTasks();
-            addNameTextbox.value = '';
+        .then(data => {
+            item.id = data;
+            todo.taskId = data;
         })
+        .then(() => {
+            document.querySelector('#tasks').innerHTML += _getTaskHtmlBlock(item);
+            addTaskToGroup(todo);
+        })
+        .catch(error => console.error('Unable to add item.', error));
+}
+
+function addTaskToGroup(item){
+    fetch(uri_todo, {
+        method: 'POST',
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(item)
+    })
+        .then(response => response.json())
         .catch(error => console.error('Unable to add item.', error));
 }
 
@@ -329,28 +274,21 @@ function deleteTask(id) {
     fetch(`${uri_task}/${id}`, {
         method: 'DELETE'
     })
-        // .then(() => getTasks())
         .catch(error => console.error('Unable to delete item.', error));
+
+    document.getElementById("task_"+id).outerHTML = "";
 }
 
-// function displayEditForm(id) {
-//     const item = todos.find(item => item.id === id);
-//
-//     document.getElementById('edit-name').value = item.taskName;
-//     document.getElementById('edit-id').value = item.id;
-//     document.getElementById('edit-isComplete').checked = item.isDone;
-//     document.getElementById('editForm').style.display = 'block';
-// }
-
-function updateTask() {
-    const itemId = document.getElementById('edit-id').value;
+function updateTask(id) {
+    const updatedTask = document.getElementById('taskname-input_'+id).value;
+    
     const item = {
-        id: parseInt(itemId, 10),
-        isDone: document.getElementById('edit-isComplete').checked,
-        taskName: document.getElementById('edit-name').value.trim()
+        id: id,
+        isDone: document.getElementById('task-checkbox_' + id).checked,
+        taskName: updatedTask
     };
 
-    fetch(`${uri_task}/${itemId}`, {
+    fetch(`${uri_task}/${id}`, {
         method: 'PUT',
         headers: {
             'Accept': 'application/json',
@@ -358,28 +296,23 @@ function updateTask() {
         },
         body: JSON.stringify(item)
     })
-        // .then(() => getTasks())
         .catch(error => console.error('Unable to update item.', error));
 
-    closeInput();
-
-    return false;
+    document.querySelector('#task_'+id).innerHTML = '';
+    document.querySelector('#task_'+id).innerHTML += _getTaskInputHtmlBlock(item);
+    if(item.isDone)
+        document.getElementById('task-checkbox_' + item.id).setAttribute("checked", "");
 }
 
-// function closeInput() {
-//     document.getElementById('editForm').style.display = 'none';
-// }
-//
-// function _displayCount(itemCount) {
-//     const name = (itemCount === 1) ? 'task' : 'tasks';
-//
-//     document.getElementById('counter').innerText = `${itemCount} ${name}`;
-// }
-
-function _displayTasks(data) {
+function _displayTasks(data){
     data.forEach(item => {
         document.querySelector('#tasks').innerHTML += _getTaskHtmlBlock(item);
+        if(item.isDone)
+            document.getElementById('task-checkbox_' + item.id).setAttribute("checked", "");
     });
+}
 
-    todos = data;
+function _addTaskHtml(item){
+    document.querySelector('#task_'+item.id).innerHTML += _getTaskInputHtmlBlock(item);
+    document.getElementById('task-checkbox_' + item.id).setAttribute("checked", "");
 }
