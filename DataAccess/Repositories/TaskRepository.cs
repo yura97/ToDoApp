@@ -26,12 +26,36 @@ namespace DataAccess.Repositories
             return mapper.Map<IReadOnlyCollection<Task>>(tasksDb);
         }
         
-        public IEnumerable<Task> GetTasksForGroup(int id)
+        public IEnumerable<Task> GetTasksForGroup_All(int id)
         {
             var idsTasks = context.ToDos.ToList().Where(ids => ids.TaskGroupId == id).ToList();
             var tasksDb = context.Tasks.ToList();
 
             var result = tasksDb.Where(a => idsTasks.Any(b => b.TaskId == a.Id)).ToList();
+
+            return mapper.Map<IReadOnlyCollection<Task>>(result);
+        }
+        
+        public IEnumerable<Task> GetTasksForGroup_Active(int id)
+        {
+            var idsTasks = context.ToDos.ToList().Where(ids => ids.TaskGroupId == id).ToList();
+            var tasksDb = context.Tasks.ToList();
+
+            var result = tasksDb.Where(a => idsTasks.Any(b => b.TaskId == a.Id))
+                .Where(f => f.IsDone == false)
+                .ToList();
+
+            return mapper.Map<IReadOnlyCollection<Task>>(result);
+        }
+        
+        public IEnumerable<Task> GetTasksForGroup_Completed(int id)
+        {
+            var idsTasks = context.ToDos.ToList().Where(ids => ids.TaskGroupId == id).ToList();
+            var tasksDb = context.Tasks.ToList();
+
+            var result = tasksDb.Where(a => idsTasks.Any(b => b.TaskId == a.Id))
+                .Where(f => f.IsDone )
+                .ToList();
 
             return mapper.Map<IReadOnlyCollection<Task>>(result);
         }

@@ -14,30 +14,17 @@ a {
   color: #000000;
 }
 
-/*.btn-primary {*/
-/*  color: #fff;*/
-/*  background-color: #1b6ec2;*/
-/*  border-color: #1861ac;*/
-/*}*/
-
-/*.nav-pills .nav-link.active, .nav-pills .show > .nav-link {*/
-/*  color: #fff;*/
-/*  background-color: #1b6ec2;*/
-/*  border-color: #1861ac;*/
-/*}*/
-
-/* Sticky footer styles
--------------------------------------------------- */
 html {
-  font-size: 14px;
+  font-size: 20px;
   font-family: Arial, Helvetica, sans-serif;
 }
 
 
 #todo-app{
   border-radius: 5px;
-  width: 40%;
-  height: 50vh;
+  /*width: 40%;*/
+  width: 754.8px;
+  /*height: 50vh;*/
   margin: auto;
   padding: 0;
   background: #37bb81;
@@ -52,7 +39,10 @@ html {
   height: 80%;
   background: #FFF;
   border-radius: 25px 25px 0 0;
-  padding: 6% 4%;
+  padding: 20px;
+  /*flex-direction: column;*/
+  display: grid;
+  justify-items: stretch;
 }
 .todo-app__add{
   display: inline-block;
@@ -76,16 +66,38 @@ html {
   cursor: pointer;
 }
 .todo-app__filter{
-  background: white;
+  background: #88d97f;
   border-radius: 10px 10px 10px 10px;
   border: none;
-  padding: 1px 20px;
-  margin: 3px;
+  padding: 10px 20px;
+  /*margin: 3px;*/
+  /*display: inline-flex;*/
+  display: grid;
+  grid-template-columns: 210px auto;
+}
+.filter_counter{
+  /*background: #1b7fd3;*/
+  display: inline-flex;
+  padding: 0 20px;
+}
+.filter_buttons{
+  /*background: #61b04e;*/
+  display: inline-flex;
+  justify-content: space-evenly;
+  padding: 7px;
+}
+.filter_buttons button{
+  width: 20%;
+  background: #37bb81;
+  border-radius: 10px 10px 10px 10px;
+  box-shadow: none;
+  border: 1px solid #939697;
+  font-size: 16px;
 }
 
-.tasks{
-  margin-left: 10%;
-}
+/*.tasks{*/
+/*  margin-left: 10%;*/
+/*}*/
 
 input[type='submit'], button, [aria-label] {
   cursor: pointer;
@@ -93,7 +105,6 @@ input[type='submit'], button, [aria-label] {
 
 #editForm {
   display: none;
-  
 }
 
 #groups{
@@ -102,7 +113,17 @@ input[type='submit'], button, [aria-label] {
   flex-wrap: nowrap;
   justify-content: flex-start;
   align-items: flex-end;
+
+  /*overflow-y: auto;*/
+  /*overflow-x: hidden;*/
+  
+  /*transform: rotate(-90deg) translateY(-100px);*/
+  /*transform-origin: right top;*/
 }
+/*#groups > div {*/
+/*  transform: rotate(90deg);*/
+/*  transform-origin: right top;*/
+/*}*/
 .todo__group{
   border-radius: 10px 10px 0px 0px;
   padding: 0 8px;
@@ -113,60 +134,38 @@ input[type='submit'], button, [aria-label] {
 }
 .todo__input{
   border: none;
-}
-
-/*#add-name{*/
-/*  background: white;*/
-/*  padding: 5px 10px;*/
-/*  outline: none;*/
-/*  border: none;*/
-/*  border-radius: 10px 0 0 10px;*/
-/*}*/
-
-
-/*table {*/
-/*  !*font-family: Arial, sans-serif;*!*/
-/*  !*border: 1px solid;*!*/
-/*  border-collapse: collapse;*/
-/*}*/
-/*.tt{*/
-/*  border-collapse: collapse;*/
-/*}*/
-
-/*th {*/
-/*  background-color: #f8f8f8;*/
-/*  padding: 5px;*/
-/*}*/
-
-/*td {*/
-/*  border: 1px solid;*/
-/*  padding: 5px;*/
-/*}*/
-
-table, th, td {
-  border-collapse: separate;
+  /*outline: 1px solid;*/
+  outline: none;
 }
 
 #tasks{
   border-radius: 10px;
-  width: 100%;
-  position: relative;
-  background-color: #ffffff;
+  position: center;
+  /*width: 90%;*/
+  /*position: relative;*/
+  background-color: #88d97f;
   padding: 30px 20px;
   margin-top: 10px;
 }
 
+/*margin: 0 80% 0 auto;*/
+/*font-size: 22px;*/
+/*width: fit-content;*/
+
 .task{
   border-radius: 5px;
-  align-items: center;
-  justify-content: space-between;
+  /*align-items: center;*/
   border: 1px solid #939697;
   cursor: pointer;
-  background-color: #c5e1e6;
+  background-color: #ffffff;
   height: 50px;
   margin-bottom: 8px;
   padding: 5px 10px;
-  display: flex;
+  /*display: flex;*/
+
+  display: grid;
+  grid-template-columns: 30px auto 30px;
+  /*font-size: 22px;*/
 }
 .task span{
   font-family: 'Poppins',sans-serif;
@@ -174,13 +173,14 @@ table, th, td {
   font-weight: 400;
 }
 
-.task button{
-  background-color: #0a2ea4;
-  color: #ffffff;
-  border: none;
-  cursor: pointer;
-  outline: none;
-  height: 100%;
-  width: 40px;
-  border-radius: 5px;
+.task a{
+  text-align: center; 
+  margin-top: 33%
+}
+.task input[type='text']{
+  margin-left: 10px;
+  font-size: 22px;
+}
+.task input[type='checkbox']{
+  filter: hue-rotate(260deg)
 }

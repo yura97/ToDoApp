@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>To-do CRUD</title>
+    <title>To-do</title>
     <link rel="stylesheet" href="css/site.css" />
     <link rel="shortcut icon" type="image/x-icon" href="favicon.ico" />
 </head>
@@ -12,11 +12,7 @@
     <div id="todo-app__header">
         <div>TO DO</div>
         <div class="todo-app__add">
-<!--            <form action="javascript:void(0);" method="POST" onsubmit="addTask()">-->
-<!--                <input type="text" class="add__input" id="add-name" placeholder="New task">-->
-<!--                <input type="submit" class="add__button" value="Add Task">-->
-<!--            </form>-->
-            <input type="text" class="add__input" id="add-name" placeholder="New task">
+            <input type="text" class="add__input" id="add-task" placeholder="New task">
             <input type="submit" class="add__button" value="Add Task" onclick="addTask()">
         </div>
         <br style="clear: both;">
@@ -26,7 +22,7 @@
 <!--                <input type="submit" class="add__button" value="Add Group">-->
 <!--            </form>-->
             <input type="text" class="add__input" id="add-group" placeholder="New group">
-            <input type="submit" class="add__button" value="Add Group">
+            <input type="submit" class="add__button" value="Add Group" onclick="addGroup()">
         </div>
     </div>
     <div id="groups">
@@ -34,8 +30,14 @@
     </div>
     <div id="todo-app__body">
         <div class="todo-app__filter">
-            <p id="counter"></p>
-            <p 
+            <div class="filter_counter">
+                <p id="counter"></p>
+            </div>
+            <div class="filter_buttons">
+                <button id="filter-all" class="filter_button" onclick="setAllFilter()">All</button>
+                <button id="filter-active" class="filter_button" onclick="setActiveFilter()">Active</button>
+                <button id="filter-completed" class="filter_button" onclick="setCompletedFilter()">Completed</button>
+            </div>
         </div>
         <div id="tasks">
             
@@ -44,6 +46,7 @@
         <script src="js/taskGroup.js" asp-append-version="true"></script>
         <script type="text/javascript">
             getGroups();
+            setFilters('filter-all');
         </script>
     </div>
 </div>

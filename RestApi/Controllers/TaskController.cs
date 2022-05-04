@@ -38,10 +38,21 @@ namespace RestApi.Controllers
         }
         
         [HttpGet("tasks/task-group/{id}")]
-        public ActionResult<IReadOnlyCollection<Task>> GetTasksForGroup(int id)
+        public ActionResult<IReadOnlyCollection<Task>> GetAllTasksForGroup(int id)
         {
-            // return _taskService.GetAll().ToArray();
-            return _taskService.GetTasksForGroup(id).ToArray();
+            return _taskService.GetTasksForGroup_All(id).ToArray();
+        }
+        
+        [HttpGet("tasks/task-group/{id}/active")]
+        public ActionResult<IReadOnlyCollection<Task>> GetActiveTasksForGroup(int id)
+        {
+            return _taskService.GetTasksForGroup_Active(id).ToArray();
+        }
+        
+        [HttpGet("tasks/task-group/{id}/completed")]
+        public ActionResult<IReadOnlyCollection<Task>> GetCompletedTasksForGroup(int id)
+        {
+            return _taskService.GetTasksForGroup_Completed(id).ToArray();
         }
 
         [HttpPost]

@@ -1,32 +1,7 @@
 ﻿const uri_group = 'api/task-group';
 
 let chosenGroupId = 0;
-
-// let item = {
-//     id: null,
-//     taskGroupName: null
-// };
-
-// let groupBlock = `
-//             <div class="todo__group" id="group_${item.id}">
-//                 <span id="groupname">
-//                     ${item.taskGroupName}
-//                 </span>
-//                 <a onclick="deleteGroup(${item.id})" aria-label="Close">&#10006;</a>
-//                 <div class="tasks" id="tasks_${item.id}"></div>
-//                 <img src="images/edit.png" alt="Edit group">
-//             </div>
-//         `;
-
-// <div className="todo__group" id="group_${item.id}">
-//                 <span id="groupname">
-//                     ${item.taskGroupName}
-//                 </span>
-//     <a onClick="deleteGroup(${item.id})" aria-label="Close">&#10006;</a>
-//     <div className="tasks" id="tasks_${item.id}"></div>
-//     <!--                <img onclick="updateGroup(${item.id})" src="images/edit.png" alt="Edit group" >-->
-//     <button onClick="displayGroupEditForm(${item.id})">Edit</button>
-// </div>
+let deletedGroupId = 0;
 
 function _getGroupHtmlBlock(item) {
     return `
@@ -45,8 +20,6 @@ function _getGroupHtmlInput(item) {
         `;
 }
 
-//onblur="document.getElementById('groupname-input_'+${item.id}).setAttribute('disabled', '');"
-
 function _getHtmlForChosenGroup(id){
     return `
             <a id="close-group_${id}" onclick="deleteGroup(${id})" aria-label="Close">&#10006;</a>
@@ -54,12 +27,13 @@ function _getHtmlForChosenGroup(id){
 }
 
 function choseGroup(id){
-    if( id !== chosenGroupId )
+    if( id !== chosenGroupId && id !== deletedGroupId)
     {
+        setAllFilter();
         changeHtmlLastChosenGroup(chosenGroupId);
         setChosenGroup(id);
-        clearTasks();
     }
+    deletedGroupId = 0;
 }
 
 function changeHtmlLastChosenGroup(id){
@@ -121,6 +95,8 @@ function addGroup() {
             document.querySelector('#groups').innerHTML += _getGroupHtmlBlock(item);
         })
         .catch(error => console.error('Unable to add item.', error));
+
+    document.getElementById('add-group').value = '';
 }
 
 function deleteGroup(id) {
@@ -129,7 +105,10 @@ function deleteGroup(id) {
     })
         .catch(error => console.error('Unable to delete item.', error));
     
+    deletedGroupId = id;
     document.getElementById("group_"+id).outerHTML = "";
+    let defaultGroupId = document.querySelector('.todo__group').id.slice(-1);
+    setChosenGroup(parseInt(defaultGroupId, 10));
 }
 
 function updateGroup(id) {
@@ -156,11 +135,12 @@ function updateGroup(id) {
     changeHtmlChosenGroup(id);
 }
 
-// function _displayCount(itemCount) {
-//     const name = (itemCount === 1) ? 'task' : 'tasks';
-//
-//     document.getElementById('counter').innerText = `${itemCount} ${name}`;
-// }
+function _displayCount(itemCount) {
+    const name = (itemCount === 1) ? 'task' : 'tasks';
+    const filter = uri_filter.substring(1);
+    
+    document.getElementById('counter').innerText = `${itemCount} ${filter} ${name}`;
+}
 
 function _displayGroups(data) {
     
@@ -184,16 +164,19 @@ function _displayGroups(data) {
 }
 
 
-// Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
-// for details on configuring this project to bundle and minify static web assets.
 
-// Write your JavaScript code.
+
+
+
+
 const uri_task = 'api/task';
 const uri_todo = 'api/todo';
 
+let uri_filter = '';
+
 function _getTaskHtmlBlock(item) {
     return `
-            <div class="todo__task" id="task_${item.id}" >
+            <div class="task" id="task_${item.id}" >
                 ${_getTaskInputHtmlBlock(item)}
             </div>
         `;
@@ -206,13 +189,37 @@ function _getTaskInputHtmlBlock(item) {
                 onchange="updateTask(${item.id})">
             <a onclick="deleteTask(${item.id})" aria-label="Close">&#10006;</a>
         `;
-} 
+}
 
+function setAllFilter() {
+    uri_filter = '';
+    getTasksForGroup(chosenGroupId);
+    setFilters('filter-all');
+}
+function setActiveFilter() {
+    uri_filter = '/active';
+    getTasksForGroup(chosenGroupId);
+    setFilters('filter-active');
+}
+function setCompletedFilter() {
+    uri_filter = '/completed';
+    getTasksForGroup(chosenGroupId);
+    setFilters('filter-completed');
+}
+function setFilters(filter){
+    document.getElementById('filter-all').style.background = "";
+    document.getElementById('filter-active').style.background = "";
+    document.getElementById('filter-completed').style.background = "";
+    document.getElementById(filter).style.background = "#61b04e";
+}
 
 function getTasksForGroup(groupId){
-    fetch(uri_task+"/tasks/task-group/"+groupId)
+    fetch(uri_task+"/tasks/task-group/" + groupId + uri_filter)
         .then(response => response.json())
-        .then(data => _displayTasks(data))
+        .then(data => {
+            clearTasks();
+            _displayTasks(data);
+        })
         .catch(error => console.error('Unable to get tasks.', error));
 }
 
@@ -224,7 +231,7 @@ function getTasks() {
 }
 
 function addTask() {
-    const addNameTextbox = document.getElementById('add-name');
+    const addNameTextbox = document.getElementById('add-task');
 
     const item = {
         id: 0,
@@ -255,6 +262,8 @@ function addTask() {
             addTaskToGroup(todo);
         })
         .catch(error => console.error('Unable to add item.', error));
+
+    document.getElementById('add-task').value = '';
 }
 
 function addTaskToGroup(item){
@@ -268,6 +277,9 @@ function addTaskToGroup(item){
     })
         .then(response => response.json())
         .catch(error => console.error('Unable to add item.', error));
+
+    let count = document.getElementById('counter').innerText.trim()[0];
+    _displayCount(parseInt(count, 10) + 1);
 }
 
 function deleteTask(id) {
@@ -277,6 +289,8 @@ function deleteTask(id) {
         .catch(error => console.error('Unable to delete item.', error));
 
     document.getElementById("task_"+id).outerHTML = "";
+    let count = document.getElementById('counter').innerText.trim()[0];
+    _displayCount(parseInt(count, 10) - 1);
 }
 
 function updateTask(id) {
@@ -305,14 +319,11 @@ function updateTask(id) {
 }
 
 function _displayTasks(data){
+    _displayCount(data.length);
+    
     data.forEach(item => {
         document.querySelector('#tasks').innerHTML += _getTaskHtmlBlock(item);
         if(item.isDone)
             document.getElementById('task-checkbox_' + item.id).setAttribute("checked", "");
     });
-}
-
-function _addTaskHtml(item){
-    document.querySelector('#task_'+item.id).innerHTML += _getTaskInputHtmlBlock(item);
-    document.getElementById('task-checkbox_' + item.id).setAttribute("checked", "");
 }

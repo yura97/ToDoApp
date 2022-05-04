@@ -8,7 +8,9 @@ namespace Domain.Repositories
         int New(Task task); 
         Task? Get(int id); 
         IEnumerable<Task> GetAll();
-        IEnumerable<Task> GetTasksForGroup(int id);
+        IEnumerable<Task> GetTasksForGroup_All(int id);
+        IEnumerable<Task> GetTasksForGroup_Active(int id);
+        IEnumerable<Task> GetTasksForGroup_Completed(int id);
         int Edit(Task task); 
         void Delete(int id);
     }
