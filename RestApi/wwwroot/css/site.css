@@ -1,7 +1,4 @@
-﻿/* Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
-for details on configuring this project to bundle and minify static web assets. */
-
-input[disabled] {pointer-events:none}
+﻿input[disabled] {pointer-events:none}
 
 a.navbar-brand {
   white-space: normal;
@@ -9,7 +6,6 @@ a.navbar-brand {
   word-break: break-all;
 }
 
-/* Provide sufficient contrast against white background */
 a {
   color: #000000;
 }
@@ -22,16 +18,13 @@ html {
 
 #todo-app{
   border-radius: 5px;
-  /*width: 40%;*/
   width: 754.8px;
-  /*height: 50vh;*/
   margin: auto;
   padding: 0;
   background: #37bb81;
 }
 #todo-app__header{
   background: transparent;
-  /*height: 20%;*/
   text-align: center;
   padding: 10px 0px;
 }
@@ -40,14 +33,12 @@ html {
   background: #FFF;
   border-radius: 25px 25px 0 0;
   padding: 20px;
-  /*flex-direction: column;*/
   display: grid;
   justify-items: stretch;
 }
 .todo-app__add{
   display: inline-block;
   margin: 3px 0px;
-  /*height: 50%;*/
   width: 80%;
 }
 .add__input{
@@ -70,23 +61,19 @@ html {
   border-radius: 10px 10px 10px 10px;
   border: none;
   padding: 10px 20px;
-  /*margin: 3px;*/
-  /*display: inline-flex;*/
   display: grid;
   grid-template-columns: 210px auto;
 }
-.filter_counter{
-  /*background: #1b7fd3;*/
+.filter__counter{
   display: inline-flex;
   padding: 0 20px;
 }
-.filter_buttons{
-  /*background: #61b04e;*/
+.filter__buttons{
   display: inline-flex;
   justify-content: space-evenly;
   padding: 7px;
 }
-.filter_buttons button{
+.filter__buttons button{
   width: 20%;
   background: #37bb81;
   border-radius: 10px 10px 10px 10px;
@@ -94,10 +81,6 @@ html {
   border: 1px solid #939697;
   font-size: 16px;
 }
-
-/*.tasks{*/
-/*  margin-left: 10%;*/
-/*}*/
 
 input[type='submit'], button, [aria-label] {
   cursor: pointer;
@@ -113,17 +96,8 @@ input[type='submit'], button, [aria-label] {
   flex-wrap: nowrap;
   justify-content: flex-start;
   align-items: flex-end;
-
-  /*overflow-y: auto;*/
-  /*overflow-x: hidden;*/
-  
-  /*transform: rotate(-90deg) translateY(-100px);*/
-  /*transform-origin: right top;*/
 }
-/*#groups > div {*/
-/*  transform: rotate(90deg);*/
-/*  transform-origin: right top;*/
-/*}*/
+
 .todo__group{
   border-radius: 10px 10px 0px 0px;
   padding: 0 8px;
@@ -134,38 +108,28 @@ input[type='submit'], button, [aria-label] {
 }
 .todo__input{
   border: none;
-  /*outline: 1px solid;*/
   outline: none;
 }
 
 #tasks{
   border-radius: 10px;
   position: center;
-  /*width: 90%;*/
-  /*position: relative;*/
   background-color: #88d97f;
   padding: 30px 20px;
   margin-top: 10px;
 }
 
-/*margin: 0 80% 0 auto;*/
-/*font-size: 22px;*/
-/*width: fit-content;*/
-
 .task{
   border-radius: 5px;
-  /*align-items: center;*/
   border: 1px solid #939697;
   cursor: pointer;
   background-color: #ffffff;
   height: 50px;
   margin-bottom: 8px;
   padding: 5px 10px;
-  /*display: flex;*/
 
   display: grid;
   grid-template-columns: 30px auto 30px;
-  /*font-size: 22px;*/
 }
 .task span{
   font-family: 'Poppins',sans-serif;
