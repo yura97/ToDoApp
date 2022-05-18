@@ -1,116 +1,86 @@
-﻿/*!* Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification*/
-/*for details on configuring this project to bundle and minify static web assets. *!*/
+﻿input[disabled] {pointer-events:none}
 
-/*a.navbar-brand {*/
-/*  white-space: normal;*/
-/*  text-align: center;*/
-/*  word-break: break-all;*/
-/*}*/
+a.navbar-brand {
+  white-space: normal;
+  text-align: center;
+  word-break: break-all;
+}
 
-/*!* Provide sufficient contrast against white background *!*/
-/*a {*/
-/*  color: #0366d6;*/
-/*}*/
+a {
+  color: #000000;
+}
 
-/*.btn-primary {*/
-/*  color: #fff;*/
-/*  background-color: #1b6ec2;*/
-/*  border-color: #1861ac;*/
-/*}*/
-
-/*.nav-pills .nav-link.active, .nav-pills .show > .nav-link {*/
-/*  color: #fff;*/
-/*  background-color: #1b6ec2;*/
-/*  border-color: #1861ac;*/
-/*}*/
-
-/*!* Sticky footer styles*/
-/*-------------------------------------------------- *!*/
-/*html {*/
-/*  font-size: 14px;*/
-/*}*/
-/*@media (min-width: 768px) {*/
-/*  html {*/
-/*    font-size: 16px;*/
-/*  }*/
-/*}*/
-
-/*.border-top {*/
-/*  border-top: 1px solid #e5e5e5;*/
-/*}*/
-/*.border-bottom {*/
-/*  border-bottom: 1px solid #e5e5e5;*/
-/*}*/
-
-/*.box-shadow {*/
-/*  box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05);*/
-/*}*/
-
-/*button.accept-policy {*/
-/*  font-size: 1rem;*/
-/*  line-height: inherit;*/
-/*}*/
-
-/*!* Sticky footer styles*/
-/*-------------------------------------------------- *!*/
-/*html {*/
-/*  position: relative;*/
-/*  min-height: 100%;*/
-/*}*/
-
-/*body {*/
-/*  !* Margin bottom by footer height *!*/
-/*  margin-bottom: 60px;*/
-/*}*/
-/*.footer {*/
-/*  position: absolute;*/
-/*  bottom: 0;*/
-/*  width: 100%;*/
-/*  white-space: nowrap;*/
-/*  line-height: 60px; !* Vertically center the text there *!*/
-/*}*/
+html {
+  font-size: 20px;
+  font-family: Arial, Helvetica, sans-serif;
+}
 
 
-
-/*.todo-app{*/
-/*  border-radius: 5px;*/
-/*  width: 40%;*/
-/*  height: 50vh;*/
-/*  margin: auto;*/
-/*  padding: 0;*/
-/*  background: #78a9ce;*/
-/*}*/
-/*.todo-app__header{*/
-/*  background: transparent;*/
-/*  height: 20%;*/
-/*  text-align: center;*/
-/*}*/
-/*.todo-app__body{*/
-/*  height: 80%;*/
-/*  background: #FFF;*/
-/*  border-radius: 25px 25px 0 0;*/
-/*}*/
-/*.todo-app__add{*/
-/*}*/
-/*.add{*/
-/*  display: inline-block;*/
-/*  background: #fff;*/
-/*}*/
-/*.add__input{*/
-/*  background: white;*/
-/*  padding: 5px 10px;*/
-/*  outline: none;*/
-/*  border: none;*/
-/*  border-radius: 10px 0 0 10px;*/
-/*}*/
-/*.add__button{*/
-/*  background: white;*/
-/*  padding: 5px 10px;*/
-/*  outline: none;*/
-/*  border: none;*/
-/*  border-radius: 10px 0 0 10px;*/
-/*  cursor: pointer;*/
-/*}*/
+#todo-app{
+  border-radius: 5px;
+  width: 754.8px;
+  margin: auto;
+  padding: 0;
+  background: #37bb81;
+}
+#todo-app__header{
+  background: transparent;
+  text-align: center;
+  padding: 10px 0px;
+}
+#todo-app__body{
+  height: 80%;
+  background: #FFF;
+  border-radius: 25px 25px 0 0;
+  padding: 20px;
+  display: grid;
+  justify-items: stretch;
+}
+.todo-app__add{
+  display: inline-block;
+  margin: 3px 0px;
+  width: 80%;
+}
+.add__input{
+  background: white;
+  padding: 5px 10px;
+  outline: none;
+  border: none;
+  border-radius: 10px 0 0 10px;
+}
+.add__button{
+  background: white;
+  padding: 5px 10px;
+  outline: none;
+  border: none;
+  border-radius: 0px 10px 10px 0px;
+  cursor: pointer;
+}
+.todo-app__filter{
+  background: #88d97f;
+  border-radius: 10px 10px 10px 10px;
+  border: none;
+  padding: 10px 20px;
+  display: grid;
+  grid-template-columns: 210px auto;
+}
+.filter__counter{
+  display: inline-flex;
+  padding: 0 20px;
+}
+.filter__buttons{
+  display: inline-flex;
+  justify-content: space-evenly;
+  padding: 7px;
+}
+.filter__buttons button{
+  width: 20%;
+  background: #37bb81;
+  border-radius: 10px 10px 10px 10px;
+  box-shadow: none;
+  border: 1px solid #939697;
+  font-size: 16px;
+}
 
 input[type='submit'], button, [aria-label] {
   cursor: pointer;
@@ -120,18 +90,61 @@ input[type='submit'], button, [aria-label] {
   display: none;
 }
 
-table {
-  font-family: Arial, sans-serif;
-  border: 1px solid;
-  border-collapse: collapse;
+#groups{
+  padding-left: 25px;
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: flex-start;
+  align-items: flex-end;
 }
 
-th {
-  background-color: #f8f8f8;
-  padding: 5px;
+.todo__group{
+  border-radius: 10px 10px 0px 0px;
+  padding: 0 8px;
+  background: #FFF;
+  flex-wrap: nowrap;
+  display: inline-flex;
+  white-space: nowrap;
+}
+.todo__input{
+  border: none;
+  outline: none;
 }
 
-td {
-  border: 1px solid;
-  padding: 5px;
+#tasks{
+  border-radius: 10px;
+  position: center;
+  background-color: #88d97f;
+  padding: 30px 20px;
+  margin-top: 10px;
+}
+
+.task{
+  border-radius: 5px;
+  border: 1px solid #939697;
+  cursor: pointer;
+  background-color: #ffffff;
+  height: 50px;
+  margin-bottom: 8px;
+  padding: 5px 10px;
+
+  display: grid;
+  grid-template-columns: 30px auto 30px;
+}
+.task span{
+  font-family: 'Poppins',sans-serif;
+  font-size: 15px;
+  font-weight: 400;
+}
+
+.task a{
+  text-align: center; 
+  margin-top: 33%
+}
+.task input[type='text']{
+  margin-left: 10px;
+  font-size: 22px;
+}
+.task input[type='checkbox']{
+  filter: hue-rotate(260deg)
 }

@@ -11,7 +11,7 @@ namespace DataAccess
         {
             return services
                 .AddAutoMapper(typeof(MapperProfile))
-                .AddDbContext<TasksDbContext>(options => options.UseNpgsql(connectionString))
+                .AddDbContext<TasksDbContext>(options => options.UseSqlite(connectionString))
                 .AddScoped<ITaskRepository, TaskRepository>()
                 .AddScoped<ITaskGroupRepository, TaskGroupRepository>()
                 .AddScoped<IToDoRepository, ToDoRepository>();

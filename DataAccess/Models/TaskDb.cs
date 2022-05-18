@@ -14,10 +14,5 @@ namespace DataAccess.Models
         public bool IsDone { get; set; }
         
         public List<ToDoDb> ToDos { get; set; } = new List<ToDoDb>();
-        
-        // [Required]
-        // public int TaskGroupId { get; set; } 
-        //
-        // public TaskGroupDb TaskGroup { get; set; }
     }
 }

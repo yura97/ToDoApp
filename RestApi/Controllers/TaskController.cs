@@ -32,18 +32,36 @@ namespace RestApi.Controllers
         }
         
         [HttpGet]
-        public ActionResult<IReadOnlyCollection<Task>> GetTask()
+        public ActionResult<IReadOnlyCollection<Task>> GetTasks()
         {
             return _taskService.GetAll().ToArray();
         }
+        
+        [HttpGet("tasks/task-group/{id}")]
+        public ActionResult<IReadOnlyCollection<Task>> GetAllTasksForGroup(int id)
+        {
+            return _taskService.GetTasksForGroup_All(id).ToArray();
+        }
+        
+        [HttpGet("tasks/task-group/{id}/active")]
+        public ActionResult<IReadOnlyCollection<Task>> GetActiveTasksForGroup(int id)
+        {
+            return _taskService.GetTasksForGroup_Active(id).ToArray();
+        }
+        
+        [HttpGet("tasks/task-group/{id}/completed")]
+        public ActionResult<IReadOnlyCollection<Task>> GetCompletedTasksForGroup(int id)
+        {
+            return _taskService.GetTasksForGroup_Completed(id).ToArray();
+        }
 
         [HttpPost]
-        public IActionResult AddStudent(Task task)
+        public IActionResult AddTask(Task task)
         {
             try
             {
                 var newTaskId = _taskService.New(task);
-                return Ok($"api/task/{newTaskId}");
+                return Ok(newTaskId);
             }
             catch (Exception e)
             {
@@ -53,12 +71,13 @@ namespace RestApi.Controllers
         }
         
         [HttpPut("{id}")]
-        public ActionResult<string> UpdateStudent(int id, Task task)
+        public ActionResult<string> UpdateTask(int id, Task task)
         {
             try
             {
                 var taskId = _taskService.Edit(task with { Id = id });
-                return Ok($"api/task/{taskId}");
+                // return Ok($"api/task/{taskId}");
+                return Ok(taskId);
             }
             catch (Exception e)
             {
@@ -68,7 +87,7 @@ namespace RestApi.Controllers
         }
         
         [HttpDelete("{id}")]
-        public ActionResult DeleteStudent(int id)
+        public ActionResult DeleteTask(int id)
         {
             try
             {

@@ -2,43 +2,49 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>To-do CRUD</title>
+    <title>To-do</title>
     <link rel="stylesheet" href="css/site.css" />
+    <link rel="shortcut icon" type="image/x-icon" href="favicon.ico" />
 </head>
 <body>
-<h1>To-do CRUD</h1>
-<h3>Add</h3>
-<form action="javascript:void(0);" method="POST" onsubmit="addItem()">
-    <input type="text" id="add-name" placeholder="New to-do">
-    <input type="submit" value="Add">
-</form>
 
-<div id="editForm">
-    <h3>Edit</h3>
-    <form action="javascript:void(0);" onsubmit="updateItem()">
-        <input type="hidden" id="edit-id">
-        <input type="checkbox" id="edit-isComplete">
-        <input type="text" id="edit-name">
-        <input type="submit" value="Save">
-        <a onclick="closeInput()" aria-label="Close">&#10006;</a>
-    </form>
+<div id="todo-app">
+    <div id="todo-app__header">
+        <div>TO DO</div>
+        <div class="todo-app__add">
+            <input type="text" class="add__input" id="add-task" placeholder="New task">
+            <input type="submit" class="add__button" value="Add Task" onclick="addTask()">
+        </div>
+        <br style="clear: both;">
+        <div class="todo-app__add">
+            <input type="text" class="add__input" id="add-group" placeholder="New group">
+            <input type="submit" class="add__button" value="Add Group" onclick="addGroup()">
+        </div>
+    </div>
+    <div id="groups">
+        
+    </div>
+    <div id="todo-app__body">
+        <div class="todo-app__filter">
+            <div class="filter__counter">
+                <p id="counter"></p>
+            </div>
+            <div class="filter__buttons">
+                <button id="filter-all" class="filter_button" onclick="setAllFilter()">All</button>
+                <button id="filter-active" class="filter_button" onclick="setActiveFilter()">Active</button>
+                <button id="filter-completed" class="filter_button" onclick="setCompletedFilter()">Completed</button>
+            </div>
+        </div>
+        <div id="tasks">
+            
+        </div>
+        
+        <script src="js/taskGroup.js" asp-append-version="true"></script>
+        <script type="text/javascript">
+            getGroups();
+            setFilters('filter-all');
+        </script>
+    </div>
 </div>
-
-<p id="counter"></p>
-
-<table>
-    <tr>
-        <th>Is Complete?</th>
-        <th>Name</th>
-        <th></th>
-        <th></th>
-    </tr>
-    <tbody id="todos"></tbody>
-</table>
-
-<script src="js/site.js" asp-append-version="true"></script>
-<script type="text/javascript">
-    getItems();
-</script>
 </body>
 </html>

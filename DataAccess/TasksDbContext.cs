@@ -17,6 +17,7 @@ namespace DataAccess
 
         public TasksDbContext(DbContextOptions<TasksDbContext> options) : base(options)
         {
+            // Database.EnsureDeleted();
             Database.EnsureCreated();
         }
 
@@ -40,6 +41,16 @@ namespace DataAccess
                 {
                     new TaskGroupDb { Id = 1, TaskGroupName = "Homework"},
                     new TaskGroupDb { Id = 2, TaskGroupName = "To Buy"},
+                });
+            
+            modelBuilder.Entity<ToDoDb>().HasData(
+                new ToDoDb[] 
+                {
+                    new ToDoDb { TaskGroupId = 1, TaskId = 1},
+                    new ToDoDb { TaskGroupId = 1, TaskId = 2},
+                    new ToDoDb { TaskGroupId = 1, TaskId = 3},
+                    new ToDoDb { TaskGroupId = 2, TaskId = 4},
+                    new ToDoDb { TaskGroupId = 2, TaskId = 5},
                 });
         }
     }

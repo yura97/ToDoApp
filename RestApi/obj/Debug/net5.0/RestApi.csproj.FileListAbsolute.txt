@@ -43,3 +43,13 @@ E:\Data\Docs\Polytech Magistracy\2\web\ToDoApp\RestApi\obj\Debug\net5.0\refint\R
 E:\Data\Docs\Polytech Magistracy\2\web\ToDoApp\RestApi\obj\Debug\net5.0\RestApi.pdb
 E:\Data\Docs\Polytech Magistracy\2\web\ToDoApp\RestApi\obj\Debug\net5.0\RestApi.genruntimeconfig.cache
 E:\Data\Docs\Polytech Magistracy\2\web\ToDoApp\RestApi\obj\Debug\net5.0\ref\RestApi.dll
+E:\Data\Docs\Polytech Magistracy\2\web\ToDoApp\RestApi\bin\Debug\net5.0\Microsoft.Extensions.DependencyModel.dll
+E:\Data\Docs\Polytech Magistracy\2\web\ToDoApp\RestApi\bin\Debug\net5.0\Serilog.dll
+E:\Data\Docs\Polytech Magistracy\2\web\ToDoApp\RestApi\bin\Debug\net5.0\Serilog.AspNetCore.dll
+E:\Data\Docs\Polytech Magistracy\2\web\ToDoApp\RestApi\bin\Debug\net5.0\Serilog.Extensions.Hosting.dll
+E:\Data\Docs\Polytech Magistracy\2\web\ToDoApp\RestApi\bin\Debug\net5.0\Serilog.Extensions.Logging.dll
+E:\Data\Docs\Polytech Magistracy\2\web\ToDoApp\RestApi\bin\Debug\net5.0\Serilog.Formatting.Compact.dll
+E:\Data\Docs\Polytech Magistracy\2\web\ToDoApp\RestApi\bin\Debug\net5.0\Serilog.Settings.Configuration.dll
+E:\Data\Docs\Polytech Magistracy\2\web\ToDoApp\RestApi\bin\Debug\net5.0\Serilog.Sinks.Console.dll
+E:\Data\Docs\Polytech Magistracy\2\web\ToDoApp\RestApi\bin\Debug\net5.0\Serilog.Sinks.Debug.dll
+E:\Data\Docs\Polytech Magistracy\2\web\ToDoApp\RestApi\bin\Debug\net5.0\Serilog.Sinks.File.dll
